@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Title from '../common/Title'
 import swapi from '../../api/swapi'
 
-export default function Listing () {
-  const [entity, setEntity] = useState(getEntityFromUrl())
+export default function Listing (props) {
+  const [entity, setEntity] = useState(getEntityFromLocation(useLocation()))
   const [results, setResults] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  useEffect(function setEntityonLocationChange () {
-    setEntity(getEntityFromUrl())
-  }, [window.location.pathname])
+  const history = useHistory()
+
+  useEffect(function setEntityOnLocationChange () {
+    return history.listen((location) => {
+      setEntity(getEntityFromLocation(location))
+    })
+  }, [history])
 
   useEffect(function setResultsOnEntityChange () {
     async function callSwapi () {
@@ -25,7 +30,9 @@ export default function Listing () {
       }
     }
 
-    callSwapi()
+    if (entity) {
+      callSwapi()
+    }
   }, [entity])
 
   return (
@@ -38,11 +45,12 @@ export default function Listing () {
     </div>
   )
 
-  // ***********************************
+  // *******************
 
-  function getEntityFromUrl () {
-    const location = window.location.pathname
-    const entity = location.match(/planets|starships|vehicles|people|films|species/)
-    return entity[0]
+  function getEntityFromLocation (location) {
+    const rgx = /planets|starships|vehicles|people|films|species/
+    const match = location.pathname.match(rgx)
+    if (match) return match[0]
+    return ''
   }
 }

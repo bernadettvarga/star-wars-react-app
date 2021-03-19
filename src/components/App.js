@@ -7,13 +7,20 @@ import Listing from './listing/Listing'
 import View from './view/View'
 
 function App () {
+  // TODO: add regex validation to routes
   return (
     <BrowserRouter>
       <>
         <NavBar />
-        <Route path='/' exact component={Dashboard} />
-        <Route path='/listing' component={Listing} />
-        <Route path='/view' component={View} />
+        <Route path='/' exact>
+          <Dashboard />
+        </Route>
+        <Route path='/listing'>
+          <Listing />
+        </Route>
+        <Route path='/view'>
+          <View />
+        </Route>
       </>
     </BrowserRouter>
   )
