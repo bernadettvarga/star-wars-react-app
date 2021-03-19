@@ -5,6 +5,8 @@ import swapi from '../../api/swapi'
 export default function Listing () {
   const [entity, setEntity] = useState(getEntityFromUrl())
   const [results, setResults] = useState([])
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(function setEntityonLocationChange () {
     setEntity(getEntityFromUrl())
@@ -13,11 +15,13 @@ export default function Listing () {
   useEffect(function setResultsOnEntityChange () {
     async function callSwapi () {
       try {
+        setLoading(true)
         const { data } = await swapi.get(`/${entity}`)
         setResults(data.results)
       } catch (err) {
-        // TODO: set an error state
-        console.log(err)
+        setError(true)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -27,7 +31,10 @@ export default function Listing () {
   return (
     <div>
       <Title name={entity} />
-      <p>{results.length}</p>
+      {(loading) && <p>Loading...</p>}
+      {(!loading && error) && <p>Oops, an error occured.</p>}
+      {(!loading && !error && results.length === 0) && <p>No results found.</p>}
+      {(!loading && !error && results.length > 0) && <p>{results.length}</p>}
     </div>
   )
 
