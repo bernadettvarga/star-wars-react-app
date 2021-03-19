@@ -42,8 +42,7 @@ export default function Listing () {
 
   function getEntityFromUrl () {
     const location = window.location.pathname
-    const regex = /\/listing\/(?<entity>planets|starships|vehicles|people|films|species)/
-    const match = location.match(regex)
-    return match.groups.entity
+    const entity = location.match(/planets|starships|vehicles|people|films|species/)
+    return entity[0]
   }
 }
