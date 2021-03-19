@@ -35,8 +35,8 @@ export default function Listing () {
 
   function getEntityFromUrl () {
     const location = window.location.pathname
-    // TODO: specify the regex more to only accept the valid entities
-    const match = location.match(/\/listing\/(?<entity>[a-z]+)[/]?/)
+    const regex = /\/listing\/(?<entity>planets|starships|vehicles|people|films|species)/
+    const match = location.match(regex)
     return match.groups.entity
   }
 }
