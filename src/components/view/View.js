@@ -1,7 +1,8 @@
 import React from 'react'
+import Title from '../common/Title'
 
 export default function View () {
   return (
-    <div>View</div>
+    <Title name='View' />
   )
 }

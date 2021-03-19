@@ -1,7 +1,8 @@
 import React from 'react'
+import Title from '../common/Title'
 
 export default function Listing () {
   return (
-    <div>Listing</div>
+    <Title name='Listing' />
   )
 }
