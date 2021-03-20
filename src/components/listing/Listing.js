@@ -24,7 +24,7 @@ export default function Listing (props) {
     setEndpoint(getEndpointFromLocation(window.location))
   }, [])
 
-  useEffect(function setEndpointOnLocationChange () {
+  useEffect(function updateStatesOnLocationChange () {
     return history.listen((location) => {
       setEndpoint(getEndpointFromLocation(location))
       setEntity(getEntityFromLocation(location))
