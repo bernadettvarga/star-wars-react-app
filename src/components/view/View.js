@@ -119,7 +119,7 @@ export default function View (props) {
     // *********************************
 
     function render (item) {
-      return <p>{item}: {result[item]}</p>
+      return <p key={item}>{item}: {result[item]}</p>
     }
   }
 }
