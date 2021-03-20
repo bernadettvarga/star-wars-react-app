@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { Container, Row, Col } from 'react-bootstrap'
 import Title from '../common/Title'
 import swapi from '../../api/swapi'
 
@@ -26,6 +27,7 @@ export default function Listing ({ entity, setEntity, getEntityFromLocation }) {
         setLoading(true)
         const { data } = await swapi.get(`/${entity}`)
         setResults(data.results)
+        setError(false)
       } catch (err) {
         setError(true)
       } finally {
@@ -44,7 +46,24 @@ export default function Listing ({ entity, setEntity, getEntityFromLocation }) {
       {(loading) && <p>Loading...</p>}
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error && results.length === 0) && <p>No results found.</p>}
-      {(!loading && !error && results.length > 0) && <p>{results.length}</p>}
+      {(!loading && !error && results.length > 0) &&
+        <Container fluid>
+          <Row xs={2} sm={5}>
+            {renderItems()}
+          </Row>
+        </Container>}
     </div>
   )
+
+  // *****************************************
+
+  function renderItems () {
+    return results.map((item) => renderCard(item))
+
+    function renderCard (item) {
+      return (
+        <Col key={item.name || item.title}>{item.name || item.title}</Col>
+      )
+    }
+  }
 }
