@@ -1,6 +1,8 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
+import Search from './Search'
 
 export default function NavBar ({ entity }) {
   return (
@@ -19,11 +21,7 @@ export default function NavBar ({ entity }) {
           </NavDropdown>
           <Nav.Link href='https://github.com/bernadettvarga' target='_blank'>Github</Nav.Link>
         </Nav>
-        {(entity) &&
-          <Form inline>
-            <FormControl type='text' placeholder={`Search for ${entity}`} className='mr-sm-2' />
-            <Button variant='outline-success'>Search</Button>
-          </Form>}
+        {(entity) && <Search entity={entity} />}
       </Navbar.Collapse>
     </Navbar>
   )
