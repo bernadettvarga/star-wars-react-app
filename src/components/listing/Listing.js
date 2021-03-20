@@ -77,7 +77,6 @@ export default function Listing (props) {
         <div>
           <CardContainer
             results={results}
-            page={page}
           />
           <PaginationContainer
             activePage={page}

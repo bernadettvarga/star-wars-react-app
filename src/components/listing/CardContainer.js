@@ -2,10 +2,9 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-export default function CardContainer ({ results, page }) {
+export default function CardContainer ({ results }) {
   return (
     <Container fluid>
-      <p>page: {page}</p>
       <Row xs={2} sm={5}>
         {renderItems()}
       </Row>
