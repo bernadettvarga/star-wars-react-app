@@ -35,6 +35,10 @@ export default function View (props) {
   }, [endpoint])
 
   return (
-    <Title name={result.name || result.title} />
+    <div>
+      {(loading) && <p>Loading...</p>}
+      {(!loading && error) && <p>Oops, an error occured.</p>}
+      {(!loading && !error) && <Title name={result.name || result.title} />}
+    </div>
   )
 }
