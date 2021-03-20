@@ -3,14 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import NavBar from './navbar/NavBar'
 import Dashboard from './dashboard/Dashboard'
-import Listing from './listing/Listing'
-import View from './view/View'
+import ContentWrapper from './ContentWrapper'
 
 function App () {
-  const defaultEndpoint = getEndpointFromLocation(window.location)
   const defaultEntity = getEntityFromLocation(window.location)
-
-  const [endpoint, setEndpoint] = useState(defaultEndpoint)
   const [entity, setEntity] = useState(defaultEntity)
 
   // TODO: add regex validation to routes
@@ -22,38 +18,19 @@ function App () {
         <Route path='/' exact>
           <Dashboard />
         </Route>
-        <Route path='/listing'>
-          <Listing
-            endpoint={endpoint}
-            setEndpoint={setEndpoint}
-            getEndpointFromLocation={getEndpointFromLocation}
+        <Route path={['/listing', '/view']}>
+          <ContentWrapper
             entity={entity}
             setEntity={setEntity}
             getEntityFromLocation={getEntityFromLocation}
             getStateFromLocation={getStateFromLocation}
           />
         </Route>
-        <Route path='/view'>
-          <View />
-        </Route>
       </div>
     </BrowserRouter>
   )
 
   // *********************************
-
-  function getEndpointFromLocation (location) {
-    const state = 'endpoint'
-    const regex = /\/listing\/(?<endpoint>.*)/
-    const defaultValue = ''
-
-    return getStateFromLocation({
-      state,
-      regex,
-      defaultValue,
-      location
-    })
-  }
 
   function getEntityFromLocation (location) {
     const state = 'entity'
