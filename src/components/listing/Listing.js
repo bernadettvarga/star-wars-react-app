@@ -4,7 +4,14 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Title from '../common/Title'
 import swapi from '../../api/swapi'
 
-export default function Listing ({ endpoint, setEndpoint, getEndpointFromLocation }) {
+export default function Listing (props) {
+  const {
+    endpoint,
+    setEndpoint,
+    getEndpointFromLocation,
+    getStateFromLocation
+  } = props
+
   const [results, setResults] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -62,18 +69,30 @@ export default function Listing ({ endpoint, setEndpoint, getEndpointFromLocatio
 
   // *****************************************
 
-  // TODO: általánosítani, kiszervezni az appba
-
   function getEntityFromLocation (location) {
-    const rgx = /(?<entity>planets|starships|vehicles|people|films|species)/
-    const match = `${location.pathname}${location.search}`.match(rgx)
-    return match?.groups.entity || ''
+    const state = 'entity'
+    const regex = /(?<entity>planets|starships|vehicles|people|films|species)/
+    const defaultValue = ''
+
+    return getStateFromLocation({
+      state,
+      regex,
+      defaultValue,
+      location
+    })
   }
 
   function getPageFromLocation (location) {
-    const rgx = /\?page=(?<page>\d+)/
-    const match = `${location.pathname}${location.search}`.match(rgx)
-    return match?.groups.page || 1
+    const state = 'page'
+    const regex = /\?page=(?<page>\d+)/
+    const defaultValue = 1
+
+    return getStateFromLocation({
+      state,
+      regex,
+      defaultValue,
+      location
+    })
   }
 
   function renderItems () {
