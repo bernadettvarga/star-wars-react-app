@@ -79,6 +79,7 @@ export default function Listing (props) {
           <PaginationContainer
             activePage={page}
             pageCount={Math.ceil(itemCount / 10)}
+            entity={entity}
           />
         </div>}
     </div>
