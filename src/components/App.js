@@ -7,7 +7,11 @@ import Listing from './listing/Listing'
 import View from './view/View'
 
 function App () {
-  const [endpoint, setEndpoint] = useState(getEndpointFromLocation(window.location))
+  const defaultEndpoint = getEndpointFromLocation(window.location)
+  const defaultEntity = getEntityFromLocation(window.location)
+
+  const [endpoint, setEndpoint] = useState(defaultEndpoint)
+  const [entity, setEntity] = useState(defaultEntity)
 
   // TODO: add regex validation to routes
 
@@ -23,6 +27,9 @@ function App () {
             endpoint={endpoint}
             setEndpoint={setEndpoint}
             getEndpointFromLocation={getEndpointFromLocation}
+            entity={entity}
+            setEntity={setEntity}
+            getEntityFromLocation={getEntityFromLocation}
             getStateFromLocation={getStateFromLocation}
           />
         </Route>
@@ -38,6 +45,19 @@ function App () {
   function getEndpointFromLocation (location) {
     const state = 'endpoint'
     const regex = /\/listing\/(?<endpoint>.*)/
+    const defaultValue = ''
+
+    return getStateFromLocation({
+      state,
+      regex,
+      defaultValue,
+      location
+    })
+  }
+
+  function getEntityFromLocation (location) {
+    const state = 'entity'
+    const regex = /(?<entity>planets|starships|vehicles|people|films|species)/
     const defaultValue = ''
 
     return getStateFromLocation({

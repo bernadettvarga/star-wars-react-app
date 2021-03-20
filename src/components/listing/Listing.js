@@ -11,25 +11,28 @@ export default function Listing (props) {
     endpoint,
     setEndpoint,
     getEndpointFromLocation,
+    entity,
+    setEntity,
+    getEntityFromLocation,
     getStateFromLocation
   } = props
 
-  const defaultEntity = getEntityFromLocation(window.location)
   const defaultPage = Number(getPageFromLocation(window.location))
 
   const [results, setResults] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [entity, setEntity] = useState(defaultEntity)
   const [page, setPage] = useState(defaultPage)
   const [itemCount, setItemCount] = useState(0)
 
   const history = useHistory()
 
-  useEffect(function setEndpointOnFirstRender () {
+  useEffect(function setStatesOnFirstRender () {
     const endpoint = getEndpointFromLocation(window.location)
+    const entity = getEntityFromLocation(window.location)
 
     setEndpoint(endpoint)
+    setEntity(entity)
   }, [])
 
   useEffect(function updateStatesOnLocationChange () {
@@ -86,19 +89,6 @@ export default function Listing (props) {
   )
 
   // *****************************************
-
-  function getEntityFromLocation (location) {
-    const state = 'entity'
-    const regex = /(?<entity>planets|starships|vehicles|people|films|species)/
-    const defaultValue = ''
-
-    return getStateFromLocation({
-      state,
-      regex,
-      defaultValue,
-      location
-    })
-  }
 
   function getPageFromLocation (location) {
     const state = 'page'
