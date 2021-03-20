@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { Pagination } from 'react-bootstrap'
 
 import Title from '../common/Title'
 import CardContainer from './CardContainer'
@@ -17,7 +18,7 @@ export default function Listing (props) {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [entity, setEntity] = useState(getEntityFromLocation(window.location))
-  const [page, setPage] = useState(getPageFromLocation(window.location))
+  const [page, setPage] = useState(Number(getPageFromLocation(window.location)))
   const [itemCount, setItemCount] = useState(0)
 
   const history = useHistory()
@@ -30,7 +31,7 @@ export default function Listing (props) {
     return history.listen((location) => {
       setEndpoint(getEndpointFromLocation(location))
       setEntity(getEntityFromLocation(location))
-      setPage(getPageFromLocation(location))
+      setPage(Number(getPageFromLocation(location)))
     })
   }, [history])
 
@@ -60,7 +61,11 @@ export default function Listing (props) {
       {(loading) && <p>Loading...</p>}
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error && results.length === 0) && <p>No results found.</p>}
-      {(!loading && !error && results.length > 0) && <CardContainer results={results} page={page} />}
+      {(!loading && !error && results.length > 0) &&
+        <div>
+          <CardContainer results={results} page={page} />
+          {renderPagination()}
+        </div>}
     </div>
   )
 
@@ -90,5 +95,20 @@ export default function Listing (props) {
       defaultValue,
       location
     })
+  }
+
+  function renderPagination () {
+    const pagination = []
+    const itemsPerPage = results.length
+    const pageCount = Math.ceil(itemCount / itemsPerPage)
+
+    for (let number = 1; number <= pageCount; number++) {
+      pagination.push(
+        <Pagination.Item key={number} active={number === page}>
+          {number}
+        </Pagination.Item>
+      )
+    }
+    return (<Pagination>{pagination}</Pagination>)
   }
 }
