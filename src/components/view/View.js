@@ -3,10 +3,17 @@ import { useState, useEffect } from 'react'
 import swapi from '../../api/swapi'
 import Title from '../common/Title'
 
-export default function View ({ entity, endpoint }) {
+export default function View (props) {
+  const {
+    endpoint,
+    entity,
+    error,
+    setError,
+    loading,
+    setLoading
+  } = props
+
   const [result, setResult] = useState({})
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   useEffect(function setResultsOnLocationChange () {
     async function callSwapi () {

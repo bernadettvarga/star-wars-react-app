@@ -10,6 +10,10 @@ export default function Listing (props) {
   const {
     endpoint,
     entity,
+    error,
+    setError,
+    loading,
+    setLoading,
     getStateFromLocation
   } = props
 
@@ -17,8 +21,6 @@ export default function Listing (props) {
   const defaultPage = Number(getPageFromLocation(location))
 
   const [results, setResults] = useState([])
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(defaultPage)
   const [itemCount, setItemCount] = useState(0)
 

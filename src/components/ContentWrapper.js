@@ -16,7 +16,10 @@ export default function ContentWrapper (props) {
   const location = useLocation()
 
   const defaultEndpoint = getEndpointFromLocation(location)
+
   const [endpoint, setEndpoint] = useState(defaultEndpoint)
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(function setStatesOnFirstRender () {
     const endpoint = getEndpointFromLocation(location)
@@ -42,6 +45,10 @@ export default function ContentWrapper (props) {
         <Listing
           endpoint={endpoint}
           entity={entity}
+          error={error}
+          setError={setError}
+          loading={loading}
+          setLoading={setLoading}
           getStateFromLocation={getStateFromLocation}
         />
       </Route>
@@ -49,6 +56,10 @@ export default function ContentWrapper (props) {
         <View
           endpoint={endpoint}
           entity={entity}
+          error={error}
+          setError={setError}
+          loading={loading}
+          setLoading={setLoading}
         />
       </Route>
     </div>
