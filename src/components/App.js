@@ -7,8 +7,8 @@ import Listing from './listing/Listing'
 import View from './view/View'
 
 function App () {
-  const defaultEntity = getEntityFromLocation(window.location)
-  const [entity, setEntity] = useState(defaultEntity)
+  const defaultEndpoint = getEndpointFromLocation(window.location)
+  const [endpoint, setEndpoint] = useState(defaultEndpoint)
 
   // TODO: add regex validation to routes
 
@@ -21,9 +21,9 @@ function App () {
         </Route>
         <Route path='/listing'>
           <Listing
-            entity={entity}
-            setEntity={setEntity}
-            getEntityFromLocation={getEntityFromLocation}
+            endpoint={endpoint}
+            setEndpoint={setEndpoint}
+            getEndpointFromLocation={getEndpointFromLocation}
           />
         </Route>
         <Route path='/view'>
@@ -35,10 +35,10 @@ function App () {
 
   // *********************************
 
-  function getEntityFromLocation (location) {
-    const rgx = /planets|starships|vehicles|people|films|species/
-    const match = location.pathname.match(rgx)
-    if (match) return match[0]
+  function getEndpointFromLocation (location) {
+    const rgx = /\/listing\/(.*)/
+    const match = `${location.pathname}${location.search}`.match(rgx)
+    if (match) return match[1]
     return ''
   }
 }
