@@ -18,7 +18,7 @@ function App () {
   return (
     <BrowserRouter>
       <div>
-        <NavBar />
+        <NavBar entity={entity} />
         <Route path='/' exact>
           <Dashboard />
         </Route>
