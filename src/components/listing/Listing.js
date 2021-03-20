@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Pagination } from 'react-bootstrap'
 
 import Title from '../common/Title'
 import CardContainer from './CardContainer'
+import PaginationContainer from './PaginationContainer'
 import swapi from '../../api/swapi'
 
 export default function Listing (props) {
@@ -63,8 +63,14 @@ export default function Listing (props) {
       {(!loading && !error && results.length === 0) && <p>No results found.</p>}
       {(!loading && !error && results.length > 0) &&
         <div>
-          <CardContainer results={results} page={page} />
-          {renderPagination()}
+          <CardContainer
+            results={results}
+            page={page}
+          />
+          <PaginationContainer
+            activePage={page}
+            pageCount={Math.ceil(itemCount / 10)}
+          />
         </div>}
     </div>
   )
@@ -95,20 +101,5 @@ export default function Listing (props) {
       defaultValue,
       location
     })
-  }
-
-  function renderPagination () {
-    const pagination = []
-    const itemsPerPage = results.length
-    const pageCount = Math.ceil(itemCount / itemsPerPage)
-
-    for (let number = 1; number <= pageCount; number++) {
-      pagination.push(
-        <Pagination.Item key={number} active={number === page}>
-          {number}
-        </Pagination.Item>
-      )
-    }
-    return (<Pagination>{pagination}</Pagination>)
   }
 }
