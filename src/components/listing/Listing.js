@@ -8,6 +8,8 @@ export default function Listing ({ endpoint, setEndpoint, getEndpointFromLocatio
   const [results, setResults] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [entity, setEntity] = useState(getEntityFromLocation(window.location))
+  const [page, setPage] = useState(getPageFromLocation(window.location))
 
   const history = useHistory()
 
@@ -18,6 +20,8 @@ export default function Listing ({ endpoint, setEndpoint, getEndpointFromLocatio
   useEffect(function setEndpointOnLocationChange () {
     return history.listen((location) => {
       setEndpoint(getEndpointFromLocation(location))
+      setEntity(getEntityFromLocation(location))
+      setPage(getPageFromLocation(location))
     })
   }, [history])
 
@@ -42,12 +46,13 @@ export default function Listing ({ endpoint, setEndpoint, getEndpointFromLocatio
 
   return (
     <div>
-      <Title name={endpoint} />
+      <Title name={entity} />
       {(loading) && <p>Loading...</p>}
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error && results.length === 0) && <p>No results found.</p>}
       {(!loading && !error && results.length > 0) &&
         <Container fluid>
+          <p>page: {page}</p>
           <Row xs={2} sm={5}>
             {renderItems()}
           </Row>
@@ -56,6 +61,20 @@ export default function Listing ({ endpoint, setEndpoint, getEndpointFromLocatio
   )
 
   // *****************************************
+
+  // TODO: általánosítani, kiszervezni az appba
+
+  function getEntityFromLocation (location) {
+    const rgx = /(?<entity>planets|starships|vehicles|people|films|species)/
+    const match = `${location.pathname}${location.search}`.match(rgx)
+    return match?.groups.entity || ''
+  }
+
+  function getPageFromLocation (location) {
+    const rgx = /\?page=(?<page>\d+)/
+    const match = `${location.pathname}${location.search}`.match(rgx)
+    return match?.groups.page || 1
+  }
 
   function renderItems () {
     return results.map((item) => renderCard(item))
