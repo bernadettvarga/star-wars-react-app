@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default function CardContainer ({ results, page }) {
   return (
@@ -17,8 +18,13 @@ export default function CardContainer ({ results, page }) {
     return results.map((item) => renderCard(item))
 
     function renderCard (item) {
+      const path = item.url.match(/^http:\/\/swapi\.dev\/api\/(?<endpoint>.*$)/)
+      const fullPath = `/view/${path?.groups.endpoint}`
+
       return (
-        <Col key={item.name || item.title}>{item.name || item.title}</Col>
+        <Link key={item.name || item.title} to={fullPath}>
+          <Col>{item.name || item.title}</Col>
+        </Link>
       )
     }
   }
