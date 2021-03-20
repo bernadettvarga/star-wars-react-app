@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Title from '../common/Title'
 import swapi from '../../api/swapi'
 
-export default function Listing (props) {
-  const [entity, setEntity] = useState(getEntityFromLocation(useLocation()))
+export default function Listing ({ entity, setEntity, getEntityFromLocation }) {
   const [results, setResults] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const history = useHistory()
+
+  useEffect(function setEntityOnFirstRender () {
+    setEntity(getEntityFromLocation(window.location))
+  }, [])
 
   useEffect(function setEntityOnLocationChange () {
     return history.listen((location) => {
@@ -44,13 +47,4 @@ export default function Listing (props) {
       {(!loading && !error && results.length > 0) && <p>{results.length}</p>}
     </div>
   )
-
-  // *******************
-
-  function getEntityFromLocation (location) {
-    const rgx = /planets|starships|vehicles|people|films|species/
-    const match = location.pathname.match(rgx)
-    if (match) return match[0]
-    return ''
-  }
 }
