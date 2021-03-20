@@ -18,6 +18,7 @@ export default function Listing (props) {
   const [loading, setLoading] = useState(false)
   const [entity, setEntity] = useState(getEntityFromLocation(window.location))
   const [page, setPage] = useState(getPageFromLocation(window.location))
+  const [itemCount, setItemCount] = useState(0)
 
   const history = useHistory()
 
@@ -39,6 +40,7 @@ export default function Listing (props) {
         setLoading(true)
         const { data } = await swapi.get(`/${endpoint}`)
         setResults(data.results)
+        setItemCount(Number(data.count))
         setError(false)
       } catch (err) {
         setError(true)
