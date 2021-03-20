@@ -12,12 +12,12 @@ export default function NavBar ({ entity }) {
       <Navbar.Collapse id='main-navigation'>
         <Nav className='mr-auto'>
           <NavDropdown title='Listing' id='listing-dropdown'>
-            <NavDropdown.Item as={Link} to='/listing/planets'>Planets</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to='/listing/starships'>Starships</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to='/listing/vehicles'>Vehicles</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to='/listing/people'>People</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to='/listing/films'>Films</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to='/listing/species'>Species</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/listing/planets/'>Planets</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/listing/starships/'>Starships</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/listing/vehicles/'>Vehicles</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/listing/people/'>People</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/listing/films/'>Films</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/listing/species/'>Species</NavDropdown.Item>
           </NavDropdown>
           <Nav.Link href='https://github.com/bernadettvarga' target='_blank'>Github</Nav.Link>
         </Nav>
