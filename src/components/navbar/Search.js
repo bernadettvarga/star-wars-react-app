@@ -18,7 +18,7 @@ export default function Search ({ entity }) {
         onKeyPress={(e) => handlePressingEnter(e)}
       />
       <Button variant='outline-success' onClick={() => search()} className='search__btn'>
-        <i class="bi-search"></i>
+        <i class='bi-search' />
       </Button>
     </Form>
   )
