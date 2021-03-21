@@ -1,38 +1,12 @@
-import { useState, useEffect } from 'react'
-
-import swapi from '../../api/swapi'
 import Title from '../common/Title'
 
 export default function View (props) {
   const {
-    endpoint,
+    data,
     entity,
     error,
-    setError,
-    loading,
-    setLoading
+    loading
   } = props
-
-  const [result, setResult] = useState({})
-
-  useEffect(function setResultsOnLocationChange () {
-    async function callSwapi () {
-      try {
-        setLoading(true)
-        const { data } = await swapi.get(`/${endpoint}`)
-        setResult(data)
-        setError(false)
-      } catch (err) {
-        setError(true)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    if (endpoint) {
-      callSwapi()
-    }
-  }, [endpoint])
 
   return (
     <div>
@@ -40,7 +14,7 @@ export default function View (props) {
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error) &&
         <div>
-          <Title name={result.name || result.title} />
+          <Title name={data.name || data.title} />
           {renderDetails()}
         </div>}
     </div>
@@ -119,7 +93,7 @@ export default function View (props) {
     // *********************************
 
     function render (item) {
-      return <p key={item}>{item}: {result[item]}</p>
+      return <p key={item}>{item}: {data[item]}</p>
     }
   }
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Route, useHistory, useLocation } from 'react-router-dom'
 
+import swapi from '../api/swapi'
 import Listing from './listing/Listing'
 import View from './view/View'
 
@@ -20,6 +21,7 @@ export default function ContentWrapper (props) {
   const [endpoint, setEndpoint] = useState(defaultEndpoint)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [data, setData] = useState({})
 
   useEffect(function setStatesOnFirstRender () {
     const endpoint = getEndpointFromLocation(location)
@@ -45,27 +47,43 @@ export default function ContentWrapper (props) {
     }
   }, [endpoint])
 
+  useEffect(function callApiOnEndpointChange () {
+    async function callApiAndSetStates () {
+      try {
+        setLoading(true)
+        const { data } = await swapi.get(`/${endpoint}`)
+        setData(data)
+        setError(false)
+      } catch (err) {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (endpoint) {
+      callApiAndSetStates()
+    }
+  }, [endpoint])
+
   return (
     <div>
       <Route path='/listing'>
         <Listing
+          data={data}
           endpoint={endpoint}
           entity={entity}
           error={error}
-          setError={setError}
           loading={loading}
-          setLoading={setLoading}
           getStateFromLocation={getStateFromLocation}
         />
       </Route>
       <Route path='/view'>
         <View
-          endpoint={endpoint}
+          data={data}
           entity={entity}
           error={error}
-          setError={setError}
           loading={loading}
-          setLoading={setLoading}
         />
       </Route>
     </div>
