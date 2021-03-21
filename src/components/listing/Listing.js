@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap'
 import Header from '../common/Header'
 import CardContainer from './CardContainer'
 import PaginationContainer from './PaginationContainer'
+import SpinnerContainer from '../common/SpinnerContainer'
 
 export default function Listing (props) {
   const {
@@ -44,7 +45,7 @@ export default function Listing (props) {
   return (
     <div>
       <Header entity={entity} />
-      {(loading) && <p>Loading...</p>}
+      {(loading) && <SpinnerContainer />}
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error && data.results?.length === 0) && <p>No results found.</p>}
       {(!loading && !error && data.results?.length > 0) &&

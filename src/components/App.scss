@@ -1,7 +1,13 @@
 $sw-yellow: #ffd509;
 
+body {
+  background: rgba(0,0,0,0.05);
+  min-height: 100vh;
+}
+
 .swa {
   @import 'common/Header';
+  @import 'common/SpinnerContainer';
   @import 'navbar/NavBar';
   @import 'navbar/Search';
   @import 'dashboard/Dashboard';
