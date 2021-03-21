@@ -1,4 +1,4 @@
-import { Jumbotron, Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Header from '../common/Header'
 import SpinnerContainer from '../common/SpinnerContainer'
 import ErrorContainer from '../common/ErrorContainer'
@@ -17,10 +17,8 @@ export default function View (props) {
       {(loading) && <SpinnerContainer />}
       {(!loading && error) && <ErrorContainer />}
       {(!loading && !error) &&
-        <Container>
-          <Jumbotron>
-            {renderDetails()}
-          </Jumbotron>
+        <Container className='view'>
+          {renderDetails()}
         </Container>}
     </div>
   )
@@ -104,7 +102,12 @@ export default function View (props) {
     // *********************************
 
     function render (item) {
-      return <p key={item}>{item.replaceAll('_', ' ')}:<br />{data[item]}</p>
+      return (
+        <p key={item} className='view__item'>
+          <p className='view__item__property'>{item.replaceAll('_', ' ')}:</p>
+          <p className={`view__item__value view__item__value--${item}`}>{data[item]}</p>
+        </p>
+      )
     }
   }
 }

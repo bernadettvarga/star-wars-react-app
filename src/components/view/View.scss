@@ -1,0 +1,47 @@
+.view {
+  background: #fff;
+  padding: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 30px;
+  box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.05);
+
+  &__item {
+
+    &__property {
+      font-style: italic;
+      margin: 0;
+      font-size: 15px;
+      color: rgba(0,0,0,0.5);
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    &__value {
+      font-size: 17px;
+      padding-left: 5px;
+      font-weight: bold;
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+
+      &--name,
+      &--title {
+        font-size: 40px;
+        color: $sw-yellow;
+      }
+
+      &--opening_crawl {
+        font-weight: normal;
+        padding-right: 0;
+
+        @media screen and (min-width: $size-md) {
+          padding-right: 20%;
+        }
+      }
+    }
+  }
+}

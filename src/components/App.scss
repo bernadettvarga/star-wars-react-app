@@ -1,4 +1,5 @@
 $sw-yellow: #ffd509;
+$size-md: 992px;
 
 body {
   background: rgba(0,0,0,0.05);
@@ -14,4 +15,5 @@ body {
   @import 'dashboard/Dashboard';
   @import 'listing/CardContainer';
   @import 'listing/PaginationContainer';
+  @import 'view/View';
 }
