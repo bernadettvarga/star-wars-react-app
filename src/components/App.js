@@ -14,9 +14,9 @@ function App () {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className='swa'>
         <NavBar entity={entity} />
-        <div className='swa-content'>
+        <div>
           <Route path='/' exact>
             <Dashboard />
           </Route>

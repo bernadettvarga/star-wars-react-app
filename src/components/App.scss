@@ -1,4 +1,8 @@
-.swa-content {
+$sw-yellow: #ffd509;
+
+.swa {
   @import 'common/Header';
+  @import 'navbar/NavBar';
+  @import 'navbar/Search';
   @import 'listing/CardContainer';
 }

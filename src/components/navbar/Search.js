@@ -12,12 +12,14 @@ export default function Search ({ entity }) {
       <FormControl
         type='text'
         placeholder={`Search for ${entity}`}
-        className='mr-sm-2'
+        className='mr-sm-2 search__input'
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyPress={(e) => handlePressingEnter(e)}
       />
-      <Button variant='outline-success' onClick={() => search()}>Search</Button>
+      <Button variant='outline-success' onClick={() => search()} className='search__btn'>
+        <i class="bi-search"></i>
+      </Button>
     </Form>
   )
 
