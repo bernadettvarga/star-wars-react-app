@@ -27,7 +27,11 @@ export default function PaginationContainer (props) {
       )
     }
 
-    return (<Pagination>{pages}</Pagination>)
+    return (
+      <Pagination className='pagination-container'>
+        {pages}
+      </Pagination>
+    )
 
     // *********************************
 
