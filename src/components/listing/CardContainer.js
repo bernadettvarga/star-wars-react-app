@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 export default function CardContainer ({ results }) {
@@ -22,7 +22,9 @@ export default function CardContainer ({ results }) {
 
       return (
         <Link key={item.name || item.title} to={fullPath}>
-          <Col>{item.name || item.title}</Col>
+          <Col>
+            <Card body>{item.name || item.title}</Card>
+          </Col>
         </Link>
       )
     }
