@@ -2,7 +2,14 @@ import React from 'react'
 import { Pagination } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-export default function PaginationContainer ({ activePage, pageCount, entity }) {
+export default function PaginationContainer (props) {
+  const {
+    activePage,
+    pageCount,
+    entity,
+    searchQuery
+  } = props
+
   return renderPagination()
 
   // *********************************
@@ -13,7 +20,7 @@ export default function PaginationContainer ({ activePage, pageCount, entity }) 
     for (let page = 1; page <= pageCount; page++) {
       pages.push(
         <Pagination.Item key={page} active={page === activePage}>
-          <Link to={`/listing/${entity}/?page=${page}`}>
+          <Link to={getPath(page)}>
             {page}
           </Link>
         </Pagination.Item>
@@ -21,5 +28,12 @@ export default function PaginationContainer ({ activePage, pageCount, entity }) 
     }
 
     return (<Pagination>{pages}</Pagination>)
+
+    // *********************************
+
+    function getPath (page) {
+      const searchParam = (searchQuery) ? `&search=${searchQuery}` : ''
+      return `/listing/${entity}/?page=${page}${searchParam}`
+    }
   }
 }
