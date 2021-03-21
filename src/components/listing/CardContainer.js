@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 export default function CardContainer ({ results }) {
   return (
-    <Container fluid>
-      <Row xs={2} sm={5}>
+    <Container className='card-container'>
+      <Row xs={2} sm={2}>
         {renderItems()}
       </Row>
     </Container>
@@ -23,7 +23,9 @@ export default function CardContainer ({ results }) {
       return (
         <Link key={item.name || item.title} to={fullPath}>
           <Col>
-            <Card body>{item.name || item.title}</Card>
+            <Card className='card-container__card'>
+              <Card.Body>{item.name || item.title}</Card.Body>
+            </Card>
           </Col>
         </Link>
       )

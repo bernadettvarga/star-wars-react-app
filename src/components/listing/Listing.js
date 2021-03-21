@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 
 import Title from '../common/Title'
 import CardContainer from './CardContainer'
@@ -41,7 +42,7 @@ export default function Listing (props) {
   }, [endpoint])
 
   return (
-    <div>
+    <Container>
       <Title name={entity} />
       {(loading) && <p>Loading...</p>}
       {(!loading && error) && <p>Oops, an error occured.</p>}
@@ -58,7 +59,7 @@ export default function Listing (props) {
             searchQuery={searchQuery}
           />
         </div>}
-    </div>
+    </Container>
   )
 
   // *****************************************
