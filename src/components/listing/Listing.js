@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 
-import Title from '../common/Title'
+import Header from '../common/Header'
 import CardContainer from './CardContainer'
 import PaginationContainer from './PaginationContainer'
 
@@ -42,13 +42,13 @@ export default function Listing (props) {
   }, [endpoint])
 
   return (
-    <Container>
-      <Title name={entity} />
+    <div>
+      <Header entity={entity} />
       {(loading) && <p>Loading...</p>}
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error && data.results?.length === 0) && <p>No results found.</p>}
       {(!loading && !error && data.results?.length > 0) &&
-        <div>
+        <Container>
           <CardContainer
             results={data.results}
           />
@@ -58,8 +58,8 @@ export default function Listing (props) {
             entity={entity}
             searchQuery={searchQuery}
           />
-        </div>}
-    </Container>
+        </Container>}
+    </div>
   )
 
   // *****************************************

@@ -1,5 +1,5 @@
 import { Jumbotron, Container } from 'react-bootstrap'
-import Title from '../common/Title'
+import Header from '../common/Header'
 
 export default function View (props) {
   const {
@@ -11,17 +11,15 @@ export default function View (props) {
 
   return (
     <div>
+      <Header entity={entity} />
       {(loading) && <p>Loading...</p>}
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error) &&
-        <div>
-          <Container>
-            <Title name={data.name || data.title} />
-            <Jumbotron>
-              {renderDetails()}
-            </Jumbotron>
-          </Container>
-        </div>}
+        <Container>
+          <Jumbotron>
+            {renderDetails()}
+          </Jumbotron>
+        </Container>}
     </div>
   )
 
@@ -30,6 +28,7 @@ export default function View (props) {
   function renderDetails () {
     const config = {
       planets: [
+        'name',
         'rotation_period',
         'orbital_period',
         'diameter',
@@ -40,6 +39,7 @@ export default function View (props) {
         'population'
       ],
       starships: [
+        'name',
         'model',
         'manufacturer',
         'cost_in_credits',
@@ -54,6 +54,7 @@ export default function View (props) {
         'starship_class'
       ],
       vehicles: [
+        'name',
         'model',
         'manufacturer',
         'cost_in_credits',
@@ -66,6 +67,7 @@ export default function View (props) {
         'vehicle_class'
       ],
       people: [
+        'name',
         'height',
         'mass',
         'hair_color',
@@ -75,6 +77,7 @@ export default function View (props) {
         'gender'
       ],
       films: [
+        'title',
         'episode_id',
         'opening_crawl',
         'director',
@@ -82,6 +85,7 @@ export default function View (props) {
         'release_date'
       ],
       species: [
+        'name',
         'classification',
         'designation',
         'average_height',

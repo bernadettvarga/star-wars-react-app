@@ -1,0 +1,44 @@
+.header {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 150px;
+  text-align: center;
+  margin-bottom: 20px;
+
+  &--planets {
+    background-image: url(../../img/bg/planets.jpg);
+  }
+
+  &--people {
+    background-image: url(../../img/bg/people.jpg);
+  }
+
+  &--starships {
+    background-image: url(../../img/bg/starships.jpg);
+  }
+
+  &--vehicles {
+    background-image: url(../../img/bg/vehicles.jpg);
+  }
+
+  &--species {
+    background-image: url(../../img/bg/species.png);
+  }
+
+  &--films {
+    background-image: url(../../img/bg/films.jpg);
+  }
+
+  h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    margin: 0;
+    text-shadow: -3px 4px 14px rgba(0,0,0,0.36);
+  }
+}
