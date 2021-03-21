@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
+import './App.scss'
 import NavBar from './navbar/NavBar'
 import Dashboard from './dashboard/Dashboard'
 import ContentWrapper from './ContentWrapper'
@@ -15,17 +16,19 @@ function App () {
     <BrowserRouter>
       <div>
         <NavBar entity={entity} />
-        <Route path='/' exact>
-          <Dashboard />
-        </Route>
-        <Route path={['/listing', '/view']}>
-          <ContentWrapper
-            entity={entity}
-            setEntity={setEntity}
-            getEntityFromLocation={getEntityFromLocation}
-            getStateFromLocation={getStateFromLocation}
-          />
-        </Route>
+        <div className='content'>
+          <Route path='/' exact>
+            <Dashboard />
+          </Route>
+          <Route path={['/listing', '/view']}>
+            <ContentWrapper
+              entity={entity}
+              setEntity={setEntity}
+              getEntityFromLocation={getEntityFromLocation}
+              getStateFromLocation={getStateFromLocation}
+            />
+          </Route>
+        </div>
       </div>
     </BrowserRouter>
   )
