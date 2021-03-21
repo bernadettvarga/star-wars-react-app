@@ -21,8 +21,8 @@ export default function CardContainer ({ results }) {
       const fullPath = `/view/${path?.groups.endpoint}`
 
       return (
-        <Col className='card-container__col'>
-          <Link key={item.name || item.title} to={fullPath}>
+        <Col key={item.name || item.title} className='card-container__col'>
+          <Link to={fullPath}>
             <div className='card-container__card'>
               {item.name || item.title}
             </div>
