@@ -29,15 +29,21 @@ export default function ContentWrapper (props) {
     setEntity(entity)
   }, [])
 
-  useEffect(function updateStatesOnLocationChange () {
+  useEffect(function updateEndpointOnLocationChange () {
     return history.listen((location) => {
       const endpoint = getEndpointFromLocation(location)
-      const entity = getEntityFromLocation(location)
 
       setEndpoint(endpoint)
-      setEntity(entity)
     })
   }, [history])
+
+  useEffect(function updateEntityOnEndpointChange () {
+    const newEntity = getEntityFromLocation(location)
+
+    if (newEntity !== entity) {
+      setEntity(newEntity)
+    }
+  }, [endpoint])
 
   return (
     <div>
