@@ -1,3 +1,4 @@
+import { Jumbotron, Container } from 'react-bootstrap'
 import Title from '../common/Title'
 
 export default function View (props) {
@@ -14,8 +15,12 @@ export default function View (props) {
       {(!loading && error) && <p>Oops, an error occured.</p>}
       {(!loading && !error) &&
         <div>
-          <Title name={data.name || data.title} />
-          {renderDetails()}
+          <Container>
+            <Title name={data.name || data.title} />
+            <Jumbotron>
+              {renderDetails()}
+            </Jumbotron>
+          </Container>
         </div>}
     </div>
   )
@@ -93,7 +98,7 @@ export default function View (props) {
     // *********************************
 
     function render (item) {
-      return <p key={item}>{item}: {data[item]}</p>
+      return <p key={item}>{item.replaceAll('_', ' ')}:<br />{data[item]}</p>
     }
   }
 }
