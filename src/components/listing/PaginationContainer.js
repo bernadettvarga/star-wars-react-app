@@ -1,6 +1,6 @@
 import React from 'react'
 import { Pagination } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
 
 export default function PaginationContainer (props) {
   const {
@@ -19,11 +19,11 @@ export default function PaginationContainer (props) {
 
     for (let page = 1; page <= pageCount; page++) {
       pages.push(
-        <Pagination.Item key={page} active={page === activePage}>
-          <Link to={getPath(page)}>
+        <LinkContainer key={page} to={getPath(page)}>
+          <Pagination.Item active={page === activePage}>
             {page}
-          </Link>
-        </Pagination.Item>
+          </Pagination.Item>
+        </LinkContainer>
       )
     }
 

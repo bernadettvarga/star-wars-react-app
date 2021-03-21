@@ -1,4 +1,23 @@
 .pagination-container {
   justify-content: center;
   margin-bottom: 30px;
+
+  .page-item {
+    &.active {
+      .page-link {
+        pointer-events: none;
+        background: $sw-yellow;
+        border-color: $sw-yellow;
+        color: #fff;
+      }
+    }
+
+    .page-link {
+      color: rgba(0, 0, 0, 0.8);
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
 }
