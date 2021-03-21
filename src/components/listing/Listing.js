@@ -48,7 +48,12 @@ export default function Listing (props) {
       <Header entity={entity} />
       {(loading) && <SpinnerContainer />}
       {(!loading && error) && <ErrorContainer />}
-      {(!loading && !error && data.results?.length === 0) && <ErrorContainer msg='No results found.' />}
+      {(!loading && !error && data.results?.length === 0) &&
+        <ErrorContainer msg={`No results found ${(searchQuery) ? `for '${searchQuery}'` : ''}.`} />}
+      {(!loading && !error && data.results?.length > 0 && searchQuery) &&
+        <div className='search-results'>
+          <b>{data.results.length}</b> search result(s) for <b>'{searchQuery}'</b>
+        </div>}
       {(!loading && !error && data.results?.length > 0) &&
         <Container>
           <CardContainer
