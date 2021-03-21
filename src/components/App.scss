@@ -8,6 +8,7 @@ body {
 .swa {
   @import 'common/Header';
   @import 'common/SpinnerContainer';
+  @import 'common/ErrorContainer';
   @import 'navbar/NavBar';
   @import 'navbar/Search';
   @import 'dashboard/Dashboard';

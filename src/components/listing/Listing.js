@@ -6,6 +6,7 @@ import Header from '../common/Header'
 import CardContainer from './CardContainer'
 import PaginationContainer from './PaginationContainer'
 import SpinnerContainer from '../common/SpinnerContainer'
+import ErrorContainer from '../common/ErrorContainer'
 
 export default function Listing (props) {
   const {
@@ -46,8 +47,8 @@ export default function Listing (props) {
     <div>
       <Header entity={entity} />
       {(loading) && <SpinnerContainer />}
-      {(!loading && error) && <p>Oops, an error occured.</p>}
-      {(!loading && !error && data.results?.length === 0) && <p>No results found.</p>}
+      {(!loading && error) && <ErrorContainer />}
+      {(!loading && !error && data.results?.length === 0) && <ErrorContainer msg='No results found.' />}
       {(!loading && !error && data.results?.length > 0) &&
         <Container>
           <CardContainer

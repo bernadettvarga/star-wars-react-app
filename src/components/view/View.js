@@ -1,6 +1,7 @@
 import { Jumbotron, Container } from 'react-bootstrap'
 import Header from '../common/Header'
 import SpinnerContainer from '../common/SpinnerContainer'
+import ErrorContainer from '../common/ErrorContainer'
 
 export default function View (props) {
   const {
@@ -14,7 +15,7 @@ export default function View (props) {
     <div>
       <Header entity={entity} />
       {(loading) && <SpinnerContainer />}
-      {(!loading && error) && <p>Oops, an error occured.</p>}
+      {(!loading && error) && <ErrorContainer />}
       {(!loading && !error) &&
         <Container>
           <Jumbotron>
