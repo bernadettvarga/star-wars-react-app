@@ -52,7 +52,7 @@ export default function Listing (props) {
         <ErrorContainer msg={`No results found ${(searchQuery) ? `for '${searchQuery}'` : ''}.`} />}
       {(!loading && !error && data.results?.length > 0 && searchQuery) &&
         <div className='search-results'>
-          <b>{data.results.length}</b> search result(s) for <b>'{searchQuery}'</b>
+          <b>{itemCount}</b> search result(s) for <b>'{searchQuery}'</b>
         </div>}
       {(!loading && !error && data.results?.length > 0) &&
         <Container>
@@ -86,7 +86,7 @@ export default function Listing (props) {
 
   function getSearchQueryFromLocation (location) {
     const state = 'searchQuery'
-    const regex = /search=(?<searchQuery>.*)/
+    const regex = /search=(?<searchQuery>[^&]*)/
     const defaultValue = ''
 
     return getStateFromLocation({
