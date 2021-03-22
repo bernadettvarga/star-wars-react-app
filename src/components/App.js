@@ -10,8 +10,6 @@ function App () {
   const defaultEntity = getEntityFromLocation(window.location)
   const [entity, setEntity] = useState(defaultEntity)
 
-  // TODO: add regex validation to routes
-
   return (
     <BrowserRouter>
       <div className='swa'>
