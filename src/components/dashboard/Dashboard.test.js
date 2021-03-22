@@ -1,13 +1,13 @@
-import React from "react"
-import { render, unmountComponentAtNode } from "react-dom"
-import { act } from "react-dom/test-utils"
+import React from 'react'
+import { render, unmountComponentAtNode } from 'react-dom'
+import { act } from 'react-dom/test-utils'
 
-import Dashboard from "./Dashboard"
+import Dashboard from './Dashboard'
 
 let container = null
 
 beforeEach(() => {
-  container = document.createElement("div")
+  container = document.createElement('div')
   document.body.appendChild(container)
 })
 
@@ -17,7 +17,7 @@ afterEach(() => {
   container = null
 })
 
-it("renders with the expected text", () => {
+it('renders with the expected text', () => {
   act(() => {
     render(<Dashboard />, container)
   })
